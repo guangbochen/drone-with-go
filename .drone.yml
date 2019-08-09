@@ -1,14 +1,21 @@
-workspace:
-  base: /go
-  path: src/github.com/drone-demos/drone-with-go
+kind: pipeline
+name: default
 
-pipeline:
-  test:
-    image: golang:latest
-    commands:
-      - go vet
-      - go test -v -cover
-  build:
-    image: golang:latest
-    commands:
-      - go build
+steps:
+- name: test
+  image: golang
+  commands:
+    - go vet
+    - go test -v -cover
+  when:
+    event:
+    - push
+    - pull_request
+- name: build
+  image: golang
+  commands:
+    - go build
+  when:
+    event:
+    - push
+    - pull_request
