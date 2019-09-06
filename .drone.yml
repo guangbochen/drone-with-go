@@ -21,7 +21,7 @@ steps:
     - push
     - pull_request
 
-- name: docker-push
+- name: docker-master-image
   image: plugins/docker
   settings:
     repo: guangbo/drone-go-example
@@ -37,6 +37,20 @@ steps:
     - push
     - pull_request
 
+- name: docker-prod-image
+  image: plugins/docker
+  settings:
+    repo: guangbo/drone-go-example
+    dockerfile: Dockerfile
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    tag:
+    - ${DRONE_TAG}
+  when:
+    event: tag
+
 - name: k8s-deploy
   image: quay.io/honestbee/drone-kubernetes
   settings:
@@ -49,6 +63,6 @@ steps:
     repo: guangbo/drone-go-example
     container: drone-with-go
     tag:
-    - latest
+    - ${DRONE_TAG}
   when:
-    event: push
+    event: tag
