@@ -11,6 +11,7 @@ steps:
     event:
     - push
     - pull_request
+
 - name: build
   image: golang
   commands:
@@ -19,3 +20,16 @@ steps:
     event:
     - push
     - pull_request
+
+- name: docker
+  image: plugins/docker
+  settings:
+    repo: guangbo/drone-go-example
+    dockerfile: Dockerfile
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    auto_tag: true
+    when:
+      event: tag
