@@ -11,6 +11,7 @@ steps:
     event:
     - push
     - pull_request
+    - tag
 
 - name: build
   image: golang
@@ -20,6 +21,7 @@ steps:
     event:
     - push
     - pull_request
+    - tag
 
 - name: docker-master-image
   image: plugins/docker

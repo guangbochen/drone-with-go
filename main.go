@@ -12,5 +12,5 @@ func main() {
 
 // HelloWorld is a function that returns a string containing "hello world".
 func HelloWorldHandler(rw http.ResponseWriter, req *http.Request) {
-	fmt.Fprint(rw, "Hello World!!")
+	fmt.Fprint(rw, "Hello New World!!")
 }

@@ -29,7 +29,7 @@ func TestHelloWorld(t *testing.T) {
 	}
 
 	// Check the response body is what we expect.
-	expected := `Hello World!!`
+	expected := `Hello New World!!`
 	if rr.Body.String() != expected {
 		t.Errorf("handler returned unexpected body: got %v want %v",
 			rr.Body.String(), expected)
