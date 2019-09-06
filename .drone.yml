@@ -46,7 +46,9 @@ steps:
       from_secret: KUBERNETES_TOKEN
     namespace: default
     deployment: drone-with-go
-    repo: guangbo/drone-ci-demo
+    repo: guangbo/drone-go-example
     container: drone-with-go
+    tag:
+    - latest
   when:
     event: push
