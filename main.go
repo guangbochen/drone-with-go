@@ -1,12 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"net/http"
+)
 
 func main() {
-	fmt.Println(HelloWorld())
+	http.HandleFunc("/", HelloWorldHandler)
+	http.ListenAndServe(":8080", nil) // set listen port
 }
 
 // HelloWorld is a function that returns a string containing "hello world".
-func HelloWorld() string {
-	return "hello world"
+func HelloWorldHandler(rw http.ResponseWriter, req *http.Request) {
+	fmt.Fprint(rw, "Hello World!!")
 }
